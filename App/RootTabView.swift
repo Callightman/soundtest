@@ -3,7 +3,7 @@ import SwiftUI
 struct RootTabView: View {
     var body: some View {
         TabView {
-            Text("Connection — wired in Task 8")
+            ConnectionView()
                 .tabItem { Label("Connection", systemImage: "cable.connector") }
             Text("Test Tones — coming in Phase 2")
                 .tabItem { Label("Test Tones", systemImage: "slider.horizontal.3") }
