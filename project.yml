@@ -1,0 +1,46 @@
+name: SoundTest
+options:
+  bundleIdPrefix: com.callightman.soundtest
+  deploymentTarget:
+    tvOS: "18.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  SoundTestCore:
+    type: framework
+    platform: tvOS
+    sources: [Sources/SoundTestCore]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.callightman.soundtest.core
+        GENERATE_INFOPLIST_FILE: YES
+  SoundTest:
+    type: application
+    platform: tvOS
+    sources: [App, Features]
+    dependencies:
+      - target: SoundTestCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.callightman.soundtest
+        INFOPLIST_FILE: App/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+  SoundTestCoreTests:
+    type: bundle.unit-test
+    platform: tvOS
+    sources: [Tests/SoundTestCoreTests]
+    dependencies:
+      - target: SoundTestCore
+schemes:
+  SoundTest:
+    build:
+      targets:
+        SoundTest: all
+        SoundTestCoreTests: [test]
+    test:
+      targets: [SoundTestCoreTests]
